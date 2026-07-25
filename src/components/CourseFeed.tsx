@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { Course, FeedItem, Reel } from '../types';
+import type { Course, FeedItem, Module, Reel } from '../types';
 import Quiz from './Quiz';
-import { ArrowLeft, ChevronDown, ChevronUp, Link as LinkIcon, Book } from './Icons';
+import { ArrowLeft, ChevronDown, ChevronUp, Link as LinkIcon, Book, Menu, X, ListIcon } from './Icons';
 
 /** Flatten a course tree into the ordered vertical feed of slides. */
 function buildFeed(course: Course): FeedItem[] {
@@ -33,6 +33,36 @@ function buildFeed(course: Course): FeedItem[] {
   return items;
 }
 
+interface OutlineTopic {
+  id: string;
+  title: string;
+  index: number;
+  quizIndex?: number;
+}
+interface OutlineModule {
+  id: string;
+  title: string;
+  index: number;
+  topics: OutlineTopic[];
+}
+
+/** Build the jump-to outline (module/topic → feed index) for the menu. */
+function buildOutline(feed: FeedItem[]): OutlineModule[] {
+  const mods: OutlineModule[] = [];
+  feed.forEach((item, i) => {
+    if (item.type === 'module') {
+      mods.push({ id: item.module.id, title: item.module.title, index: i, topics: [] });
+    } else if (item.type === 'topic') {
+      mods[mods.length - 1]?.topics.push({ id: item.topic.id, title: item.topic.title, index: i });
+    } else if (item.type === 'quiz') {
+      const m = mods[mods.length - 1];
+      const t = m?.topics[m.topics.length - 1];
+      if (t) t.quizIndex = i;
+    }
+  });
+  return mods;
+}
+
 interface Props {
   course: Course;
   onExit: () => void;
@@ -40,8 +70,10 @@ interface Props {
 
 export default function CourseFeed({ course, onExit }: Props) {
   const feed = useMemo(() => buildFeed(course), [course]);
+  const outline = useMemo(() => buildOutline(feed), [feed]);
   const feedRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // Apply the course accent to this subtree. height:100% is required so the
   // scroll-snap feed inside can resolve its own 100% height.
@@ -75,17 +107,20 @@ export default function CourseFeed({ course, onExit }: Props) {
     function onKey(e: KeyboardEvent) {
       const root = feedRef.current;
       if (!root) return;
+      if (e.key === 'Escape') {
+        if (menuOpen) setMenuOpen(false);
+        else onExit();
+        return;
+      }
       if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'j', 'k'].includes(e.key)) {
         e.preventDefault();
         const dir = e.key === 'ArrowUp' || e.key === 'PageUp' || e.key === 'k' ? -1 : 1;
         goTo(active + dir);
-      } else if (e.key === 'Escape') {
-        onExit();
       }
     }
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [active]);
+  }, [active, menuOpen]);
 
   function goTo(idx: number) {
     const root = feedRef.current;
@@ -95,12 +130,22 @@ export default function CourseFeed({ course, onExit }: Props) {
     target?.scrollIntoView({ behavior: 'smooth' });
   }
 
+  function jumpTo(idx: number) {
+    setMenuOpen(false);
+    // Let the drawer close first, then scroll.
+    requestAnimationFrame(() => goTo(idx));
+  }
+
   const current = feed[active];
-  const moduleIndex = current && 'module' in current
-    ? course.modules.findIndex((m) => m.id === current.module.id)
+  const currentModuleId = current && 'module' in current ? current.module.id : null;
+  const moduleIndex = currentModuleId
+    ? course.modules.findIndex((m) => m.id === currentModuleId)
     : -1;
   const topbarTitle =
     current && 'module' in current ? current.module.title : course.shortTitle;
+
+  const atStart = active === 0;
+  const atEnd = active === feed.length - 1;
 
   return (
     <div style={accentStyle}>
@@ -113,44 +158,131 @@ export default function CourseFeed({ course, onExit }: Props) {
         <span className="topbar__count">
           {active + 1}/{feed.length}
         </span>
+        <button
+          className="topbar__menu"
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open course menu"
+        >
+          <Menu size={19} />
+        </button>
       </div>
 
-      {/* Module progress rail */}
+      {/* Module progress rail — tap a segment to jump to that module */}
       <div className="railwrap">
-        {course.modules.map((m, mi) => (
-          <div className="rail" key={m.id}>
-            <div
-              className="rail__fill"
-              style={{
-                width: mi < moduleIndex ? '100%' : mi === moduleIndex ? '55%' : '0%',
-              }}
-            />
-          </div>
-        ))}
+        {course.modules.map((m, mi) => {
+          const mo = outline.find((o) => o.id === m.id);
+          return (
+            <button
+              className="rail"
+              key={m.id}
+              aria-label={`Go to module ${mi + 1}`}
+              onClick={() => mo && goTo(mo.index)}
+            >
+              <div
+                className="rail__fill"
+                style={{
+                  width: mi < moduleIndex ? '100%' : mi === moduleIndex ? '55%' : '0%',
+                }}
+              />
+            </button>
+          );
+        })}
       </div>
 
       <div className="feed" ref={feedRef}>
         {feed.map((item, idx) => (
           <section className="slide" data-idx={idx} key={idx}>
-            <SlideBody item={item} isActive={idx === active} onExit={onExit} />
+            <SlideBody item={item} onExit={onExit} />
           </section>
         ))}
       </div>
+
+      {/* On-screen prev / next buttons for tap-only navigation */}
+      <div className="navbtns">
+        <button
+          className="navbtn"
+          onClick={() => goTo(active - 1)}
+          disabled={atStart}
+          aria-label="Previous slide"
+        >
+          <ChevronUp size={22} />
+        </button>
+        <button
+          className="navbtn navbtn--primary"
+          onClick={() => goTo(active + 1)}
+          disabled={atEnd}
+          aria-label="Next slide"
+        >
+          <ChevronDown size={22} />
+        </button>
+      </div>
+
+      {/* Jump-to menu (table of contents) */}
+      {menuOpen && (
+        <div className="drawer" onClick={() => setMenuOpen(false)}>
+          <div className="drawer__panel" onClick={(e) => e.stopPropagation()}>
+            <div className="drawer__head">
+              <div>
+                <div className="drawer__eyebrow">
+                  <ListIcon size={13} /> Jump to
+                </div>
+                <div className="drawer__title">{course.shortTitle}</div>
+              </div>
+              <button className="icon-btn" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+                <X size={18} />
+              </button>
+            </div>
+            <div className="drawer__body">
+              <button className="drawer__link drawer__link--top" onClick={() => jumpTo(0)}>
+                Course cover
+              </button>
+              <button className="drawer__link drawer__link--top" onClick={() => jumpTo(2)}>
+                Exam pattern
+              </button>
+              <button className="drawer__link drawer__link--top" onClick={() => jumpTo(3)}>
+                Full syllabus
+              </button>
+              {outline.map((m, mi) => (
+                <div className="drawer__mod" key={m.id}>
+                  <button
+                    className={`drawer__modhead ${m.id === currentModuleId ? 'is-active' : ''}`}
+                    onClick={() => jumpTo(m.index)}
+                  >
+                    <span className="drawer__modnum">{String(mi + 1).padStart(2, '0')}</span>
+                    <span>{m.title}</span>
+                  </button>
+                  {m.topics.map((t) => (
+                    <div className="drawer__topicrow" key={t.id}>
+                      <button className="drawer__topic" onClick={() => jumpTo(t.index)}>
+                        {t.title}
+                      </button>
+                      {t.quizIndex !== undefined && (
+                        <button
+                          className="drawer__quiz"
+                          onClick={() => jumpTo(t.quizIndex!)}
+                          aria-label={`Quiz for ${t.title}`}
+                        >
+                          Quiz
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ))}
+              <button className="drawer__link drawer__link--top" onClick={() => jumpTo(feed.length - 1)}>
+                Sources &amp; finish
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
 /* ----------------------------------------------------------- Slide bodies */
 
-function SlideBody({
-  item,
-  isActive,
-  onExit,
-}: {
-  item: FeedItem;
-  isActive: boolean;
-  onExit: () => void;
-}) {
+function SlideBody({ item, onExit }: { item: FeedItem; onExit: () => void }) {
   switch (item.type) {
     case 'cover':
       return <CoverSlide course={item.course} />;
@@ -167,8 +299,6 @@ function SlideBody({
     case 'reel':
       return <ReelSlide reel={item.reel} index={item.index} total={item.total} />;
     case 'quiz':
-      // Remount the quiz whenever this slide becomes active is not needed;
-      // internal state persists which is fine.
       return <Quiz topicTitle={item.topic.title} mcqs={item.topic.mcqs} />;
     case 'sources':
       return <SourcesSlide course={item.course} onExit={onExit} />;
@@ -188,7 +318,7 @@ function CoverSlide({ course }: { course: Course }) {
         <span className="swipe-arrow">
           <ChevronUp size={18} />
         </span>
-        Swipe up to start learning
+        Swipe up · or use the arrows &amp; menu
       </div>
     </div>
   );
@@ -293,7 +423,7 @@ function SyllabusSlide({ course }: { course: Course }) {
   );
 }
 
-function ModuleSlide({ course, module }: { course: Course; module: Course['modules'][0] }) {
+function ModuleSlide({ course, module }: { course: Course; module: Module }) {
   const n = course.modules.findIndex((m) => m.id === module.id) + 1;
   return (
     <div className="slide__scroll center-col">
@@ -314,13 +444,8 @@ function ModuleSlide({ course, module }: { course: Course; module: Course['modul
   );
 }
 
-function TopicSlide({
-  module,
-  topic,
-}: {
-  module: Course['modules'][0];
-  topic: Course['modules'][0]['topics'][0];
-}) {
+function TopicSlide({ module, topic }: { module: Module; topic: Module['topics'][0] }) {
+  const tricky = topic.mcqs.filter((m) => m.tricky).length;
   return (
     <div className="slide__scroll center-col">
       <span className="topic-intro__label">{module.title}</span>
@@ -328,6 +453,7 @@ function TopicSlide({
       <div className="chips" style={{ marginTop: 18 }}>
         <span className="chip">{topic.reels.length} reels</span>
         <span className="chip">{topic.mcqs.length} MCQs</span>
+        {tricky > 0 && <span className="chip chip--tricky">{tricky} tricky</span>}
       </div>
       <MoreHint label="Swipe up to learn" />
     </div>

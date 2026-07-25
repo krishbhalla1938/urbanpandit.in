@@ -58,3 +58,16 @@ export const Spark = ({ size = 20 }: P) => (
     <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
   </svg>
 );
+export const Menu = ({ size = 20 }: P) => (
+  <svg {...base(size)}><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+);
+export const ListIcon = ({ size = 20 }: P) => (
+  <svg {...base(size)}>
+    <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+  </svg>
+);
+export const Flame = ({ size = 20 }: P) => (
+  <svg {...base(size)}>
+    <path d="M12 2c1 3 4 4 4 8a4 4 0 0 1-8 0c0-1 .5-2 1-2.5C9 8 9 5 12 2Z" />
+  </svg>
+);

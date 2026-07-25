@@ -37,6 +37,8 @@ export interface MCQ {
   /** Zero-based index of the correct option. */
   answer: number;
   explanation: string;
+  /** Mark exam-trap / higher-difficulty questions so the UI can flag them. */
+  tricky?: boolean;
 }
 
 export interface Topic {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { MCQ } from '../types';
-import { Check, X, Spark } from './Icons';
+import { Check, X, Spark, Flame } from './Icons';
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 
@@ -96,6 +96,11 @@ export default function Quiz({ topicTitle, mcqs }: Props) {
         </span>
         <div className="quiz__progress">
           Question {i + 1} of {mcqs.length}
+          {q.tricky && (
+            <span className="tricky-badge">
+              <Flame size={11} /> Tricky
+            </span>
+          )}
         </div>
         <div className="quiz__q">{q.q}</div>
       </div>

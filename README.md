@@ -21,13 +21,23 @@ All six flagship certifications, each with a subject overview, exam pattern,
 | 5 | NCFM Certification | NSE Academy |
 | 6 | Financial Accounting Fundamentals | Core Curriculum |
 
+Every module carries **two topics** — a core teaching topic and a **"Deep Dive
+& Exam Traps"** topic full of tricky, exam-frequent questions — for **460+
+practice MCQs** in total (230 core + 230 tricky), each with an explanation.
+
 ## Features
 
-- **Swipe up / down** vertical reel feed (native scroll-snap; also works with
-  arrow keys / `j`·`k` / `PageUp`·`PageDown` on desktop, `Esc` to exit).
+- **Easy navigation, five ways:**
+  - **Swipe up / down** vertical reel feed (native scroll-snap).
+  - **On-screen prev / next buttons** (bottom-right) for tap-only movement.
+  - **Jump-to menu** (☰) — a table of contents to leap to any module, topic, or
+    quiz in one tap.
+  - **Tappable progress rail** — tap a segment to jump to that module.
+  - **Keyboard** — arrows / `j`·`k` / `PageUp`·`PageDown`, `Esc` to exit.
 - **Cover → Overview → Exam pattern → Full syllabus → Module → Topic → Reels →
   Quiz → Sources** for every course.
 - **Interactive MCQ decks** — answer, see the explanation, get a scored summary.
+  Tricky questions are flagged with a 🔥 badge.
 - **Premium, comfortable reading UI** — Fraunces serif display + Inter body on a
   warm paper palette, with a full **light/dark theme** toggle.
 - **Verified sourcing** — each course links its official curriculum sources.
@@ -54,8 +64,9 @@ src/
     Quiz.tsx              # interactive MCQ deck
     Icons.tsx             # icon set
   data/
-    courses.ts            # course index
+    courses.ts            # course index (merges core + deep-dive topics)
     bmc.ts nism.ts fmva.ts cfa.ts ncfm.ts accounting.ts
+    extras.ts             # per-module "Deep Dive & Exam Traps" tricky MCQs
 ```
 
 Adding or editing content only touches the `src/data/*.ts` files — the feed,
