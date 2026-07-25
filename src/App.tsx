@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { courses } from './data/courses';
 import Home from './components/Home';
-import CourseFeed from './components/CourseFeed';
+import CourseHub from './components/CourseHub';
 
 export default function App() {
   const [openId, setOpenId] = useState<string | null>(null);
@@ -24,7 +24,7 @@ export default function App() {
   return (
     <div className="app">
       {openCourse ? (
-        <CourseFeed course={openCourse} onExit={() => setOpenId(null)} />
+        <CourseHub course={openCourse} onExit={() => setOpenId(null)} />
       ) : (
         <Home
           courses={courses}

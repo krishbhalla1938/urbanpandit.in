@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Course, FeedItem, Module, Reel } from '../types';
+import { markTopicViewed } from '../lib/progress';
 import Quiz from './Quiz';
 import { ArrowLeft, ChevronDown, ChevronUp, Link as LinkIcon, Book, Menu, X, ListIcon } from './Icons';
 
@@ -121,6 +122,12 @@ export default function CourseFeed({ course, onExit }: Props) {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [active, menuOpen]);
+
+  // Record topics the learner reaches, for the completion tracker.
+  useEffect(() => {
+    const item = feed[active];
+    if (item && 'topic' in item) markTopicViewed(course.id, item.topic.id);
+  }, [active, feed, course.id]);
 
   function goTo(idx: number) {
     const root = feedRef.current;

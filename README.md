@@ -25,7 +25,25 @@ Every module carries **two topics** — a core teaching topic and a **"Deep Dive
 & Exam Traps"** topic full of tricky, exam-frequent questions — for **460+
 practice MCQs** in total (230 core + 230 tricky), each with an explanation.
 
-## Features
+## Study portal
+
+Opening a course lands on a **hub** that turns it into a full study portal:
+
+- **Course Guide** — overview, eligibility, fees, registration steps, exam
+  pattern, passing criteria, validity, a recommended **study plan**, **memory
+  tricks**, and a tickable **final revision checklist**.
+- **Module-wise Syllabus** — the complete topic list for every module.
+- **Formula Sheet** — curated key formulas per course.
+- **Flashcards** — flip cards built from every key term and glossary entry.
+- **Glossary** — searchable financial terms.
+- **Tests & Mocks** — topic tests, module tests and a shuffled full-length mock,
+  all drawn from the MCQ bank, with your **best score saved** per test.
+- **Careers & Fees** — career paths with indicative salary, recommended books,
+  and official source links.
+- **Performance analytics & completion tracker** — tests taken, average score
+  and topics seen, persisted locally (no account needed).
+
+## Learning features
 
 - **Easy navigation, five ways:**
   - **Swipe up / down** vertical reel feed (native scroll-snap).
@@ -55,18 +73,24 @@ npm run preview  # preview the production build
 
 ```
 src/
-  App.tsx                 # shell: home vs. course feed, theme
-  types.ts                # content data model
+  App.tsx                 # shell: home vs. course hub, theme
+  types.ts                # content + portal data model
   styles/global.css       # design system (palette, type, components)
+  lib/progress.ts         # localStorage analytics + completion tracker
   components/
     Home.tsx              # course picker
+    CourseHub.tsx         # per-course portal: routing, guide, careers
     CourseFeed.tsx        # flattens a course into the swipeable reel feed
-    Quiz.tsx              # interactive MCQ deck
-    Icons.tsx             # icon set
+    FeatureViews.tsx      # Formula Sheet, Flashcards, Glossary, Syllabus
+    TestsHub.tsx          # topic / module / mock test launcher
+    TestRunner.tsx        # scored test runner (saves best scores)
+    Quiz.tsx              # inline MCQ deck (in the reel feed)
+    SubView.tsx  Icons.tsx
   data/
-    courses.ts            # course index (merges core + deep-dive topics)
+    courses.ts            # course index (merges topics + meta)
     bmc.ts nism.ts fmva.ts cfa.ts ncfm.ts accounting.ts
     extras.ts             # per-module "Deep Dive & Exam Traps" tricky MCQs
+    meta.ts               # portal meta: eligibility, fees, careers, formulas…
 ```
 
 Adding or editing content only touches the `src/data/*.ts` files — the feed,

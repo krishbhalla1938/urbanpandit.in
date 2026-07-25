@@ -65,6 +65,49 @@ export interface ExamPattern {
   negativeMarking?: string;
 }
 
+export interface CareerRole {
+  role: string;
+  salary: string;
+}
+export interface StudyPhase {
+  phase: string;
+  focus: string;
+}
+export interface FormulaItem {
+  name: string;
+  formula: string;
+  note?: string;
+}
+export interface GlossaryItem {
+  term: string;
+  def: string;
+}
+export interface Mnemonic {
+  topic: string;
+  trick: string;
+}
+export interface SyllabusGroup {
+  module: string;
+  points: string[];
+}
+
+/** Rich, portal-level metadata that powers the course's feature screens. */
+export interface CourseMeta {
+  eligibility: string;
+  fee: string;
+  validity: string;
+  registration: string[];
+  studyPlan: StudyPhase[];
+  careers: CareerRole[];
+  books: string[];
+  revisionChecklist: string[];
+  mnemonics: Mnemonic[];
+  formulas: FormulaItem[];
+  glossary: GlossaryItem[];
+  /** The complete module-wise syllabus (every listed topic). */
+  syllabus: SyllabusGroup[];
+}
+
 export interface Course {
   id: string;
   title: string;
@@ -79,6 +122,8 @@ export interface Course {
   examPattern: ExamPattern;
   sources: Source[];
   modules: Module[];
+  /** Portal metadata (eligibility, fees, careers, formulas, glossary, …). */
+  meta?: CourseMeta;
 }
 
 // -------- Flattened feed model (built at runtime) --------------------------
