@@ -1,11 +1,73 @@
-<div align="center">
+# Reel Finance Academy 📈
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+A **reel-format learning app** for finance certifications — swipe up/down to move
+through full-screen "reels" that teach a syllabus and then quiz you on it, in a
+warm, editorial, premium reading experience.
 
-  <h1>Built with AI Studio</h2>
+Built with **React + TypeScript + Vite**. No backend, no external calls at
+runtime — all content is bundled, so it works offline once loaded.
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## Courses included
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+All six flagship certifications, each with a subject overview, exam pattern,
+100% syllabus in reel format, and **10+ frequently-asked MCQs per topic**:
 
-</div>
+| # | Course | Provider |
+|---|--------|----------|
+| 1 | Bloomberg Market Concepts (BMC) | Bloomberg for Education |
+| 2 | NISM Certifications | NISM · SEBI |
+| 3 | Financial Modeling & Valuation Analyst (FMVA) | Corporate Finance Institute |
+| 4 | CFA Investment Foundations | CFA Institute |
+| 5 | NCFM Certification | NSE Academy |
+| 6 | Financial Accounting Fundamentals | Core Curriculum |
+
+## Features
+
+- **Swipe up / down** vertical reel feed (native scroll-snap; also works with
+  arrow keys / `j`·`k` / `PageUp`·`PageDown` on desktop, `Esc` to exit).
+- **Cover → Overview → Exam pattern → Full syllabus → Module → Topic → Reels →
+  Quiz → Sources** for every course.
+- **Interactive MCQ decks** — answer, see the explanation, get a scored summary.
+- **Premium, comfortable reading UI** — Fraunces serif display + Inter body on a
+  warm paper palette, with a full **light/dark theme** toggle.
+- **Verified sourcing** — each course links its official curriculum sources.
+
+## Run locally
+
+```bash
+npm install
+npm run dev      # start the dev server (http://localhost:5173)
+npm run build    # type-check + production build to dist/
+npm run preview  # preview the production build
+```
+
+## Project structure
+
+```
+src/
+  App.tsx                 # shell: home vs. course feed, theme
+  types.ts                # content data model
+  styles/global.css       # design system (palette, type, components)
+  components/
+    Home.tsx              # course picker
+    CourseFeed.tsx        # flattens a course into the swipeable reel feed
+    Quiz.tsx              # interactive MCQ deck
+    Icons.tsx             # icon set
+  data/
+    courses.ts            # course index
+    bmc.ts nism.ts fmva.ts cfa.ts ncfm.ts accounting.ts
+```
+
+Adding or editing content only touches the `src/data/*.ts` files — the feed,
+quizzes and navigation are generated automatically from the data.
+
+## Sources & disclaimer
+
+Content is distilled from each certification's official curriculum and recognised
+study material (Bloomberg, NISM/SEBI, CFI, CFA Institute, NSE Academy, and
+standard financial-accounting texts such as IFRS/GAAP references). Source links
+appear on the final "You finished" reel of each course.
+
+This app is an independent study aid and is **not affiliated with or endorsed by**
+any of these organisations. Always confirm current exam patterns, fees and
+syllabi on the official provider websites before an exam.
