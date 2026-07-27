@@ -422,8 +422,8 @@ export const courseMeta: Record<string, CourseMeta> = {
     syllabus: [
       { module: 'Foundations', points: ['Introduction to Accounting', 'Accounting Principles', 'Concepts & Conventions', 'Accounting Equation', 'Capital & Revenue', 'Accrual Accounting'] },
       { module: 'Recording Process', points: ['Journal', 'Ledger', 'Trial Balance', 'Cash Book', 'Subsidiary Books', 'Bank Reconciliation', 'Rectification of Errors', 'Bills of Exchange'] },
-      { module: 'Adjustments & Assets', points: ['Depreciation', 'Inventory Valuation', 'Provision & Reserves', 'Working Capital'] },
-      { module: 'Financial Statements', points: ['Financial Statements', 'Trading Account', 'Profit & Loss Account', 'Balance Sheet', 'Cash Flow Statement', 'Ratio Analysis'] },
+      { module: 'Financial Statements', points: ['Financial Statements', 'Trading Account', 'Profit & Loss Account', 'Balance Sheet', 'Cash Flow Statement'] },
+      { module: 'Adjustments & Ratios', points: ['Depreciation', 'Inventory Valuation', 'Provision & Reserves', 'Working Capital', 'Ratio Analysis'] },
       { module: 'Standards, Tax & Controls', points: ['GST Basics', 'TDS Basics', 'Internal Controls', 'Accounting Standards', 'IFRS Basics', 'Ind AS Basics', 'Ethics in Accounting', 'Computerized Accounting'] },
     ],
   },
