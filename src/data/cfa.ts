@@ -1,4 +1,616 @@
-import type { Course } from '../types';
+import type { Course, Topic } from '../types';
+
+// Topic-by-topic build of the CFA Investment Foundations syllabus. Module ids
+// cfa-industry / cfa-tools / cfa-instruments / cfa-structure are kept so their
+// Deep Dive sets in extras.ts merge.
+
+const ethicsSystem: Topic[] = [
+  {
+    id: 'cfa-ethics',
+    title: 'Ethics',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Ethics',
+        body: [
+          'Ethics are moral principles guiding behaviour; the investment industry runs on trust, so ethics are foundational.',
+          'A framework for ethical decisions: identify the issue and stakeholders, consider alternatives, act, and reflect.',
+          'Legal and ethical are not the same — professionals follow the stricter standard.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Ethics are best defined as:', options: ['The same as laws', 'Moral principles guiding behaviour', 'Accounting rules', 'Tax rules'], answer: 1, explanation: 'Ethics are moral standards, distinct from (and often above) law.' },
+      { q: 'When law is less strict than ethics, follow:', options: ['The law', 'The stricter (ethical) standard', 'Neither', 'Whichever is cheaper'], answer: 1, explanation: 'Professionals adhere to the higher standard.', tricky: true },
+      { q: 'The investment industry depends heavily on:', options: ['Trust', 'Secrecy', 'Leverage', 'Luck'], answer: 0, explanation: 'Clients entrust money, so trust is central.' },
+      { q: 'The first step in ethical decision-making is to:', options: ['Act at once', 'Identify the issue and stakeholders', 'Ignore it', 'Ask a competitor'], answer: 1, explanation: 'Understand the issue and who is affected first.' },
+    ],
+  },
+  {
+    id: 'cfa-professional-standards',
+    title: 'Professional Standards',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Professional Standards',
+        body: [
+          'CFA Institute’s Code of Ethics and Standards of Professional Conduct set a global benchmark.',
+          'Core duties: integrity, competence, diligence, putting clients first, and avoiding/disclosing conflicts.',
+          'Prohibited: insider trading, misrepresentation and market manipulation.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'The global benchmark for professional conduct is the:', options: ['IFRS', 'CFA Institute Code and Standards', 'Basel Accord', 'SEC rulebook'], answer: 1, explanation: 'CFA Institute’s Code and Standards are the benchmark.' },
+      { q: 'A conflict of interest must be:', options: ['Concealed', 'Disclosed and managed', 'Exploited', 'Ignored'], answer: 1, explanation: 'Disclose conflicts and prioritise the client.', tricky: true },
+      { q: 'Which is prohibited conduct?', options: ['Disclosing fees', 'Insider trading', 'Diligence', 'Diversification'], answer: 1, explanation: 'Trading on material non-public information is prohibited.' },
+      { q: 'A duty to keep client information private is:', options: ['Optional', 'Confidentiality', 'Front-running', 'Arbitrage'], answer: 1, explanation: 'Confidentiality is a core professional duty.' },
+    ],
+  },
+  {
+    id: 'cfa-financial-system',
+    title: 'Financial System',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'The Financial System',
+        body: [
+          'The financial system channels funds from savers to users of capital.',
+          'It performs saving/borrowing, risk transfer, price discovery and liquidity provision.',
+          'Intermediaries, markets and infrastructure make it work.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'The financial system connects:', options: ['Only banks', 'Savers with users of capital', 'Only governments', 'Only traders'], answer: 1, explanation: 'It channels capital from savers to those who need it.' },
+      { q: 'Which is a function of the financial system?', options: ['Printing goods', 'Price discovery', 'Setting tax law', 'Manufacturing'], answer: 1, explanation: 'Price discovery is a core function.', tricky: true },
+      { q: 'A financial intermediary is, for example, a:', options: ['Bank', 'Factory', 'School', 'Farm'], answer: 0, explanation: 'Banks and asset managers are intermediaries.' },
+      { q: 'The system provides liquidity, meaning:', options: ['Guaranteed profit', 'The ability to convert assets to cash', 'Tax exemption', 'Fixed prices'], answer: 1, explanation: 'Liquidity lets participants buy/sell readily.' },
+    ],
+  },
+  {
+    id: 'cfa-financial-markets',
+    title: 'Financial Markets',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Financial Markets',
+        body: [
+          'Markets are where financial instruments are traded — money markets (short-term) and capital markets (long-term).',
+          'Primary markets issue new securities; secondary markets trade existing ones.',
+          'Efficient markets reflect available information in prices.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'New securities are issued in the:', options: ['Secondary market', 'Primary market', 'Money market only', 'FX market'], answer: 1, explanation: 'Primary markets handle new issuance.' },
+      { q: 'Short-term instruments trade in the:', options: ['Capital market', 'Money market', 'Equity market', 'Derivatives market'], answer: 1, explanation: 'Money markets deal in short-term instruments.', tricky: true },
+      { q: 'The secondary market provides:', options: ['New capital to issuers', 'Liquidity and price discovery', 'Guaranteed returns', 'Tax breaks'], answer: 1, explanation: 'It lets investors trade and sets prices.' },
+      { q: 'An efficient market reflects:', options: ['No information', 'Available information in prices', 'Only past prices', 'Only insider tips'], answer: 1, explanation: 'Efficiency means prices incorporate available information.' },
+    ],
+  },
+  {
+    id: 'cfa-financial-instruments',
+    title: 'Financial Instruments',
+    reels: [
+      {
+        kind: 'list',
+        title: 'Financial Instruments',
+        body: [
+          'Equity: ownership. Fixed income: debt paying interest. Derivatives: value from an underlying.',
+          'Pooled vehicles (funds, ETFs) and alternatives (real estate, commodities) broaden choice.',
+          'Each instrument has a distinct risk, return and liquidity profile.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Equity is a(n):', options: ['Loan', 'Ownership claim', 'Derivative', 'Currency'], answer: 1, explanation: 'Equity represents ownership.' },
+      { q: 'Fixed income is fundamentally:', options: ['Ownership', 'Debt paying interest', 'A derivative', 'A commodity'], answer: 1, explanation: 'Bonds are debt instruments.' },
+      { q: 'A derivative’s value comes from:', options: ['A central bank', 'An underlying asset', 'A dividend', 'The auditor'], answer: 1, explanation: 'Derivatives derive value from an underlying.', tricky: true },
+      { q: 'An ETF is a:', options: ['Single bond', 'Pooled fund traded on an exchange', 'Currency', 'Commodity'], answer: 1, explanation: 'ETFs are exchange-traded pooled vehicles.' },
+    ],
+  },
+];
+
+const tools: Topic[] = [
+  {
+    id: 'cfa-risk-return',
+    title: 'Risk & Return',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Risk & Return',
+        body: [
+          'Return is the gain/loss on an investment; risk is the uncertainty around that return.',
+          'The risk–return trade-off: higher expected return generally requires taking more risk.',
+          'Total return combines income (coupons/dividends) and capital gain/loss.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Higher expected return generally requires:', options: ['Less risk', 'More risk', 'No risk', 'A guarantee'], answer: 1, explanation: 'The risk–return trade-off links reward to risk.' },
+      { q: 'Total return includes income and:', options: ['Only fees', 'Capital gain/loss', 'Only tax', 'Only inflation'], answer: 1, explanation: 'Total return = income + capital gain/loss.', tricky: true },
+      { q: 'Risk is best described as:', options: ['Guaranteed loss', 'Uncertainty around returns', 'Fees', 'A coupon'], answer: 1, explanation: 'Risk is the uncertainty of outcomes.' },
+      { q: 'A risk-free asset offers:', options: ['The highest return', 'A certain (low) return', 'No return ever', 'Unlimited return'], answer: 1, explanation: 'Risk-free assets pay a low, near-certain return.' },
+    ],
+  },
+  {
+    id: 'cfa-tvm',
+    title: 'Time Value of Money',
+    reels: [
+      {
+        kind: 'formula',
+        title: 'Time Value of Money',
+        body: [
+          'A sum today is worth more than the same sum later because it can earn a return.',
+          'Future value compounds a present sum forward; present value discounts a future sum back.',
+          'Compounding earns interest on interest.',
+        ],
+        formula: 'FV = PV × (1 + r)ⁿ ;  PV = FV ÷ (1 + r)ⁿ',
+      },
+    ],
+    mcqs: [
+      { q: 'A rupee today is worth ______ a rupee next year.', options: ['Less than', 'More than', 'The same as', 'Nothing versus'], answer: 1, explanation: 'It can be invested to earn a return.' },
+      { q: '₹100 at 10% for 2 years compounds to:', options: ['₹120', '₹121', '₹110', '₹100'], answer: 1, explanation: '100 × 1.1² = ₹121.', tricky: true },
+      { q: 'Present value ______ a future amount.', options: ['Compounds', 'Discounts', 'Ignores', 'Doubles'], answer: 1, explanation: 'PV discounts future cash flows to today.' },
+      { q: 'Compounding means interest is earned on:', options: ['Only principal', 'Principal plus accumulated interest', 'Nothing', 'Fees'], answer: 1, explanation: 'Interest earns interest under compounding.' },
+    ],
+  },
+  {
+    id: 'cfa-dcf',
+    title: 'Discounted Cash Flow',
+    reels: [
+      {
+        kind: 'formula',
+        title: 'Discounted Cash Flow',
+        body: [
+          'DCF values an asset as the present value of its expected future cash flows.',
+          'The discount rate reflects the riskiness of those cash flows.',
+          'It underlies bond, equity and project valuation.',
+        ],
+        formula: 'Value = Σ CFₜ ÷ (1 + r)ᵗ',
+      },
+    ],
+    mcqs: [
+      { q: 'A DCF values an asset as the:', options: ['Sum of past prices', 'Present value of future cash flows', 'Book value', 'Par value'], answer: 1, explanation: 'DCF discounts expected future cash flows.' },
+      { q: 'The discount rate reflects the:', options: ['Coupon', 'Riskiness of the cash flows', 'Tax rate only', 'Share count'], answer: 1, explanation: 'Riskier cash flows use higher discount rates.', tricky: true },
+      { q: 'A higher discount rate gives a ______ value.', options: ['Higher', 'Lower', 'Unchanged', 'Zero'], answer: 1, explanation: 'Higher discounting reduces present value.' },
+      { q: 'DCF is used to value:', options: ['Only bonds', 'Bonds, equities and projects', 'Only currencies', 'Nothing'], answer: 1, explanation: 'DCF is a general valuation tool.' },
+    ],
+  },
+  {
+    id: 'cfa-probability',
+    title: 'Probability',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Probability',
+        body: [
+          'Probability quantifies the likelihood of an event, between 0 and 1.',
+          'Expected value weights each outcome by its probability.',
+          'It underpins risk assessment and decision-making under uncertainty.',
+        ],
+        formula: 'Expected value = Σ (probability × outcome)',
+      },
+    ],
+    mcqs: [
+      { q: 'A probability can range between:', options: ['−1 and 1', '0 and 1', '0 and 100 always', '1 and 10'], answer: 1, explanation: 'Probabilities lie between 0 and 1.' },
+      { q: 'Expected value weights outcomes by their:', options: ['Size only', 'Probability', 'Tax', 'Age'], answer: 1, explanation: 'EV = Σ probability × outcome.', tricky: true },
+      { q: 'A probability of 0 means the event is:', options: ['Certain', 'Impossible', 'Likely', 'Random'], answer: 1, explanation: '0 means it cannot happen.' },
+      { q: 'Probability helps with decisions under:', options: ['Certainty', 'Uncertainty', 'No information', 'Fixed outcomes'], answer: 1, explanation: 'It frames choices amid uncertainty.' },
+    ],
+  },
+  {
+    id: 'cfa-statistics',
+    title: 'Statistics',
+    reels: [
+      {
+        kind: 'list',
+        title: 'Statistics',
+        body: [
+          'Mean, median and mode describe central tendency; standard deviation describes dispersion (risk).',
+          'Correlation (−1 to +1) measures how two variables move together.',
+          'A normal distribution places ~68% of outcomes within one standard deviation.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Standard deviation measures:', options: ['Central tendency', 'Dispersion (spread/risk)', 'Correlation', 'Return only'], answer: 1, explanation: 'It quantifies dispersion around the mean.' },
+      { q: 'Correlation ranges from:', options: ['0 to 1', '−1 to +1', '−100 to 100', '1 to 10'], answer: 1, explanation: 'Correlation is bounded −1 to +1.', tricky: true },
+      { q: 'In a normal distribution, ~68% of outcomes fall within:', options: ['±0.5 SD', '±1 SD', '±3 SD', '±5 SD'], answer: 1, explanation: 'About 68% lie within one standard deviation.', tricky: true },
+      { q: 'The most common value in a dataset is the:', options: ['Mean', 'Median', 'Mode', 'Range'], answer: 2, explanation: 'The mode is the most frequent value.' },
+    ],
+  },
+  {
+    id: 'cfa-economics',
+    title: 'Economics',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Economics',
+        body: [
+          'Economics studies how societies allocate scarce resources.',
+          'Microeconomics looks at individual markets; macroeconomics at the whole economy.',
+          'Prices coordinate supply and demand.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Economics fundamentally deals with:', options: ['Unlimited resources', 'Allocating scarce resources', 'Only money', 'Only taxes'], answer: 1, explanation: 'Scarcity drives economic choices.' },
+      { q: 'Prices act to:', options: ['Coordinate supply and demand', 'Fix output', 'Eliminate trade', 'Set taxes'], answer: 0, explanation: 'Prices balance supply and demand.', tricky: true },
+      { q: 'The study of the whole economy is:', options: ['Microeconomics', 'Macroeconomics', 'Accounting', 'Statistics'], answer: 1, explanation: 'Macro looks at aggregate output, inflation, etc.' },
+      { q: 'Individual market behaviour is studied in:', options: ['Macroeconomics', 'Microeconomics', 'Ethics', 'Probability'], answer: 1, explanation: 'Micro examines individual decisions and markets.' },
+    ],
+  },
+  {
+    id: 'cfa-microeconomics',
+    title: 'Microeconomics',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Microeconomics',
+        body: [
+          'Microeconomics studies consumers, firms and how prices form in individual markets.',
+          'Demand slopes down, supply slopes up; equilibrium is where they meet.',
+          'Elasticity measures how quantity responds to price changes.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Market equilibrium is where:', options: ['Supply is zero', 'Supply meets demand', 'Prices are fixed', 'Demand is infinite'], answer: 1, explanation: 'Equilibrium is the supply–demand intersection.' },
+      { q: 'Demand for a necessity is typically:', options: ['Highly elastic', 'Inelastic', 'Infinite', 'Negative'], answer: 1, explanation: 'Necessities show inelastic demand.', tricky: true },
+      { q: 'A demand curve usually slopes:', options: ['Downward', 'Upward', 'Flat', 'Vertical always'], answer: 0, explanation: 'Higher prices reduce quantity demanded.' },
+      { q: 'Elasticity measures the response of quantity to:', options: ['Time', 'Price changes', 'Colour', 'Tax season'], answer: 1, explanation: 'Elasticity is quantity sensitivity to price.' },
+    ],
+  },
+  {
+    id: 'cfa-macroeconomics',
+    title: 'Macroeconomics',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Macroeconomics',
+        body: [
+          'Macroeconomics studies aggregates: GDP, inflation, unemployment and the business cycle.',
+          'Monetary policy (central banks) and fiscal policy (governments) steer the economy.',
+          'Macro conditions shape asset returns broadly.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Which is a macroeconomic variable?', options: ['One firm’s price', 'GDP', 'A single stock', 'A coupon'], answer: 1, explanation: 'GDP is an economy-wide aggregate.' },
+      { q: 'Monetary policy is run by the:', options: ['Government treasury', 'Central bank', 'Companies', 'Exchange'], answer: 1, explanation: 'Central banks conduct monetary policy.' },
+      { q: 'Fiscal policy uses:', options: ['Interest rates', 'Taxes and government spending', 'QE', 'Reserve requirements'], answer: 1, explanation: 'Fiscal policy = taxation and spending.', tricky: true },
+      { q: 'Macro conditions affect:', options: ['No assets', 'Asset returns broadly', 'Only bonds', 'Only cash'], answer: 1, explanation: 'The macro backdrop moves markets broadly.' },
+    ],
+  },
+];
+
+const financeAnalysis: Topic[] = [
+  {
+    id: 'cfa-financial-statements',
+    title: 'Financial Statements',
+    reels: [
+      {
+        kind: 'list',
+        title: 'Financial Statements',
+        body: [
+          'The income statement, balance sheet and cash-flow statement report performance, position and cash.',
+          'Prepared under standards (IFRS/GAAP) for comparability.',
+          'Notes and disclosures add essential context.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Which shows position at a point in time?', options: ['Income statement', 'Balance sheet', 'Cash-flow statement', 'Notes'], answer: 1, explanation: 'The balance sheet is a snapshot.' },
+      { q: 'Statements are prepared under:', options: ['No rules', 'IFRS or GAAP', 'CAPM', 'PMLA'], answer: 1, explanation: 'Standards ensure comparability.', tricky: true },
+      { q: 'Performance over a period is shown by the:', options: ['Balance sheet', 'Income statement', 'Cash-flow statement', 'AGM'], answer: 1, explanation: 'The income statement covers a period.' },
+      { q: 'The notes to accounts provide:', options: ['Nothing useful', 'Essential context and detail', 'Only the logo', 'Share prices'], answer: 1, explanation: 'Disclosures add vital context.' },
+    ],
+  },
+  {
+    id: 'cfa-ratio-analysis',
+    title: 'Ratio Analysis',
+    reels: [
+      {
+        kind: 'list',
+        title: 'Ratio Analysis',
+        body: [
+          'Ratios interpret statements: liquidity, profitability, solvency and efficiency.',
+          'Examples: current ratio, net margin, ROE, debt-to-equity, asset turnover.',
+          'Compare to peers and over time for meaning.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'The current ratio measures:', options: ['Profitability', 'Liquidity', 'Leverage', 'Growth'], answer: 1, explanation: 'It gauges short-term liquidity.' },
+      { q: 'ROE = net income ÷:', options: ['Assets', 'Equity', 'Revenue', 'Debt'], answer: 1, explanation: 'Return on equity divides profit by equity.', tricky: true },
+      { q: 'Debt-to-equity measures:', options: ['Liquidity', 'Leverage', 'Margin', 'Turnover'], answer: 1, explanation: 'It gauges financial leverage.' },
+      { q: 'Ratios are meaningful when:', options: ['Viewed alone', 'Compared to peers/history', 'Rounded', 'Ignored'], answer: 1, explanation: 'Comparison gives context.' },
+    ],
+  },
+  {
+    id: 'cfa-corporate-finance',
+    title: 'Corporate Finance',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Corporate Finance',
+        body: [
+          'Corporate finance concerns how firms raise capital and invest it to create value.',
+          'Key decisions: investment (what projects), financing (debt vs equity) and dividends.',
+          'The goal is to maximise long-term shareholder value.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'The overarching goal of corporate finance is to:', options: ['Minimise sales', 'Maximise long-term shareholder value', 'Avoid all debt', 'Pay maximum tax'], answer: 1, explanation: 'Value creation for owners is the aim.' },
+      { q: 'The three core decisions are investment, financing and:', options: ['Marketing', 'Dividends', 'Hiring', 'Auditing'], answer: 1, explanation: 'Investment, financing and dividend decisions.', tricky: true },
+      { q: 'The financing decision concerns:', options: ['Which projects to pick', 'The mix of debt and equity', 'Marketing spend', 'Office location'], answer: 1, explanation: 'Financing = the capital structure mix.' },
+      { q: 'The investment decision is about:', options: ['Debt vs equity', 'Which projects/assets to fund', 'Dividend size', 'Tax filing'], answer: 1, explanation: 'It chooses value-adding projects.' },
+    ],
+  },
+  {
+    id: 'cfa-capital-budgeting',
+    title: 'Capital Budgeting',
+    reels: [
+      {
+        kind: 'formula',
+        title: 'Capital Budgeting',
+        body: [
+          'Capital budgeting evaluates long-term investment projects.',
+          'Net Present Value (NPV) discounts a project’s cash flows; accept if NPV > 0.',
+          'The Internal Rate of Return (IRR) is the discount rate where NPV = 0.',
+        ],
+        formula: 'NPV = Σ CFₜ ÷ (1 + r)ᵗ − Initial investment',
+      },
+    ],
+    mcqs: [
+      { q: 'A project should be accepted if its NPV is:', options: ['Negative', 'Greater than zero', 'Zero always', 'Unknown'], answer: 1, explanation: 'Positive NPV adds value.' },
+      { q: 'IRR is the discount rate at which NPV equals:', options: ['The investment', 'Zero', 'Revenue', 'Infinity'], answer: 1, explanation: 'IRR sets NPV to zero.', tricky: true },
+      { q: 'NPV uses the concept of:', options: ['Time value of money', 'Beta only', 'Book value', 'Par'], answer: 0, explanation: 'It discounts future cash flows to today.' },
+      { q: 'Between two projects, generally prefer the one with:', options: ['Lower NPV', 'Higher NPV', 'Negative NPV', 'No cash flows'], answer: 1, explanation: 'Higher NPV creates more value (all else equal).' },
+    ],
+  },
+  {
+    id: 'cfa-cost-of-capital',
+    title: 'Cost of Capital',
+    reels: [
+      {
+        kind: 'formula',
+        title: 'Cost of Capital',
+        body: [
+          'The cost of capital is the return investors require to fund a firm.',
+          'WACC blends the after-tax cost of debt and the cost of equity by their weights.',
+          'Projects should earn more than the cost of capital to add value.',
+        ],
+        formula: 'WACC = (E/V)·Re + (D/V)·Rd·(1 − tax)',
+      },
+    ],
+    mcqs: [
+      { q: 'WACC blends the cost of equity and the:', options: ['Coupon', 'After-tax cost of debt', 'Dividend', 'Tax refund'], answer: 1, explanation: 'WACC weights equity and after-tax debt costs.' },
+      { q: 'Debt’s cost is taken after-tax because interest is:', options: ['Tax-free income', 'Tax-deductible', 'Not paid', 'A dividend'], answer: 1, explanation: 'Interest deductibility creates a tax shield.', tricky: true },
+      { q: 'A project adds value if its return exceeds the:', options: ['Coupon', 'Cost of capital', 'Dividend', 'Tax rate'], answer: 1, explanation: 'Earning above WACC creates value.' },
+      { q: 'The cost of equity is often estimated with:', options: ['CAPM', 'The current ratio', 'RSI', 'Duration'], answer: 0, explanation: 'CAPM: Rf + β × equity risk premium.' },
+    ],
+  },
+];
+
+const portfolioInvestments: Topic[] = [
+  {
+    id: 'cfa-portfolio-management',
+    title: 'Portfolio Management',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Portfolio Management',
+        body: [
+          'Portfolio management builds and maintains a mix of investments to meet a client’s objectives and constraints.',
+          'The process: plan (IPS), execute (build the portfolio), and monitor/rebalance.',
+          'It focuses on the portfolio as a whole, not individual securities in isolation.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Portfolio management focuses on:', options: ['One stock at a time', 'The portfolio as a whole', 'Only bonds', 'Only cash'], answer: 1, explanation: 'It manages the overall mix, not isolated picks.' },
+      { q: 'The document capturing objectives and constraints is the:', options: ['DRHP', 'IPS', 'NAV', 'ISIN'], answer: 1, explanation: 'The Investment Policy Statement guides decisions.', tricky: true },
+      { q: 'Rebalancing means:', options: ['Never trading', 'Restoring target weights', 'Doubling risk', 'Selling everything'], answer: 1, explanation: 'Rebalancing returns the portfolio to target allocation.' },
+      { q: 'The portfolio process begins with:', options: ['Executing trades', 'Planning (the IPS)', 'Selling', 'Monitoring only'], answer: 1, explanation: 'Planning via the IPS comes first.' },
+    ],
+  },
+  {
+    id: 'cfa-diversification',
+    title: 'Diversification',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Diversification',
+        body: [
+          'Diversification combines assets that don’t move together to reduce risk for a given return.',
+          'It reduces unsystematic (specific) risk but not systematic (market) risk.',
+          'The benefit is greatest when correlations are low or negative.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Diversification reduces:', options: ['Systematic risk', 'Unsystematic (specific) risk', 'All risk to zero', 'Returns'], answer: 1, explanation: 'It cuts company-specific risk.' },
+      { q: 'Diversification works best with correlations that are:', options: ['+1', 'Low or negative', 'Exactly 0.9', '+2'], answer: 1, explanation: 'Low/negative correlation maximises the benefit.', tricky: true },
+      { q: 'Diversification cannot remove:', options: ['Specific risk', 'Systematic (market) risk', 'Any risk', 'Sector risk'], answer: 1, explanation: 'Market-wide risk remains.' },
+      { q: 'Two perfectly correlated assets provide diversification benefit of:', options: ['Large', 'None', 'Infinite', 'Negative'], answer: 1, explanation: 'Correlation +1 gives no diversification.', tricky: true },
+    ],
+  },
+  {
+    id: 'cfa-asset-allocation',
+    title: 'Asset Allocation',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Asset Allocation',
+        body: [
+          'Asset allocation divides a portfolio across asset classes (equity, debt, cash, alternatives).',
+          'It is the dominant driver of long-term portfolio outcomes.',
+          'Strategic allocation sets long-run weights; tactical makes short-term tilts.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Asset allocation spreads capital across:', options: ['One stock', 'Asset classes', 'Sectors only', 'One fund'], answer: 1, explanation: 'It divides across asset classes.' },
+      { q: 'Asset allocation is the ______ driver of long-term returns.', options: ['Smallest', 'Biggest', 'Only', 'Irrelevant'], answer: 1, explanation: 'It dominates long-run outcomes.', tricky: true },
+      { q: 'Long-run target weights come from ______ allocation.', options: ['Tactical', 'Strategic', 'Random', 'Reverse'], answer: 1, explanation: 'Strategic sets the long-term mix.', tricky: true },
+      { q: 'A more risk-averse investor holds ______ equity.', options: ['More', 'Less', 'Only', 'Unlimited'], answer: 1, explanation: 'Lower risk tolerance → smaller equity weight.' },
+    ],
+  },
+  {
+    id: 'cfa-equity-investments',
+    title: 'Equity Investments',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Equity Investments',
+        body: [
+          'Equities represent ownership; returns come from price gains and dividends.',
+          'They are the most junior claim — higher risk, higher potential return.',
+          'They can be held directly or via funds and ETFs.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Equity returns come from dividends and:', options: ['Coupons', 'Price appreciation', 'Interest', 'Tax refunds'], answer: 1, explanation: 'Capital gains plus dividends.' },
+      { q: 'Equity is the ______ claim on a company.', options: ['Most senior', 'Most junior (residual)', 'Only', 'Government'], answer: 1, explanation: 'Equity is paid last, after creditors.', tricky: true },
+      { q: 'Equities can be accessed via:', options: ['Only direct shares', 'Direct shares, funds and ETFs', 'Only bonds', 'Only cash'], answer: 1, explanation: 'Funds and ETFs give diversified equity exposure.' },
+      { q: 'Compared to bonds, equities generally have:', options: ['Lower risk and return', 'Higher risk and potential return', 'No risk', 'Fixed coupons'], answer: 1, explanation: 'Equity carries more risk and upside than debt.' },
+    ],
+  },
+  {
+    id: 'cfa-fixed-income',
+    title: 'Fixed Income',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Fixed Income',
+        body: [
+          'Fixed-income securities are debt that pays interest and returns principal at maturity.',
+          'They rank ahead of equity and typically carry lower risk and return.',
+          'Prices move inversely with interest rates.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Fixed income is fundamentally:', options: ['Ownership', 'Debt paying interest', 'A derivative', 'A currency'], answer: 1, explanation: 'Bonds are debt instruments.' },
+      { q: 'Bond prices move ______ with interest rates.', options: ['Directly', 'Inversely', 'Randomly', 'Not at all'], answer: 1, explanation: 'Price and yield are inversely related.', tricky: true },
+      { q: 'Fixed income ranks ______ equity in a wind-up.', options: ['Below', 'Above (senior)', 'Equal to', 'After'], answer: 1, explanation: 'Debt is senior to equity.' },
+      { q: 'Relative to equities, bonds usually have:', options: ['Higher risk', 'Lower risk and return', 'No maturity', 'Voting rights'], answer: 1, explanation: 'Debt is typically lower risk/return than equity.' },
+    ],
+  },
+  {
+    id: 'cfa-alternatives',
+    title: 'Alternative Investments',
+    reels: [
+      {
+        kind: 'list',
+        title: 'Alternative Investments',
+        body: [
+          'Alternatives include real estate, commodities, private equity, hedge funds and infrastructure.',
+          'They can diversify a portfolio and hedge inflation, but are often less liquid with higher fees.',
+          'They tend to be less correlated with stocks and bonds.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Which is an alternative investment?', options: ['A government bond', 'Private equity', 'A blue-chip stock', 'A savings account'], answer: 1, explanation: 'PE, real estate, hedge funds and commodities are alternatives.' },
+      { q: 'Alternatives are often:', options: ['Highly liquid and cheap', 'Less liquid with higher fees', 'Risk-free', 'Government-backed'], answer: 1, explanation: 'They trade less easily and cost more.', tricky: true },
+      { q: 'A benefit of alternatives is:', options: ['Guaranteed returns', 'Diversification / low correlation', 'Zero fees', 'No risk'], answer: 1, explanation: 'Low correlation can diversify a portfolio.' },
+      { q: 'Commodities can serve as a hedge against:', options: ['Deflation only', 'Inflation', 'Dividends', 'Coupons'], answer: 1, explanation: 'Commodities often hedge inflation.' },
+    ],
+  },
+  {
+    id: 'cfa-derivatives',
+    title: 'Derivatives',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Derivatives',
+        body: [
+          'A derivative’s value derives from an underlying asset; main types are forwards, futures, options and swaps.',
+          'They are used to hedge risk, gain exposure efficiently, or speculate.',
+          'Options give a right; forwards/futures create an obligation.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'A derivative derives value from:', options: ['A central bank', 'An underlying asset', 'A dividend', 'The auditor'], answer: 1, explanation: 'Its value depends on an underlying.' },
+      { q: 'An option gives the buyer:', options: ['An obligation', 'A right, not obligation', 'A coupon', 'Ownership'], answer: 1, explanation: 'Options confer a right without obligation.', tricky: true },
+      { q: 'Derivatives are used to:', options: ['Only speculate', 'Hedge, gain exposure or speculate', 'Pay dividends', 'Issue equity'], answer: 1, explanation: 'They serve hedging, exposure and speculation.' },
+      { q: 'A swap exchanges:', options: ['Ownership', 'Streams of cash flows', 'Currencies at spot only', 'Nothing'], answer: 1, explanation: 'Swaps exchange cash flows over time.' },
+    ],
+  },
+];
+
+const riskThemes: Topic[] = [
+  {
+    id: 'cfa-risk-management',
+    title: 'Risk Management',
+    reels: [
+      {
+        kind: 'list',
+        title: 'Risk Management',
+        body: [
+          'Risk management identifies, measures and controls the risks a portfolio or firm faces.',
+          'Risk types: market, credit, liquidity and operational.',
+          'Tools include diversification, hedging, limits and insurance.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'The risk of a counterparty defaulting is:', options: ['Market risk', 'Credit risk', 'Liquidity risk', 'Operational risk'], answer: 1, explanation: 'Credit risk is default risk.' },
+      { q: 'Risk from failed processes or systems is:', options: ['Market risk', 'Operational risk', 'Credit risk', 'Currency risk'], answer: 1, explanation: 'Operational risk arises from internal failures.', tricky: true },
+      { q: 'A tool to manage risk is:', options: ['Ignoring it', 'Diversification and hedging', 'Adding leverage', 'Guessing'], answer: 1, explanation: 'Diversification, hedging, limits and insurance manage risk.' },
+      { q: 'Risk management first requires:', options: ['Selling everything', 'Identifying and measuring risks', 'Maximising risk', 'Nothing'], answer: 1, explanation: 'You must identify and measure before controlling.' },
+    ],
+  },
+  {
+    id: 'cfa-behavioral-finance',
+    title: 'Behavioral Finance',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'Behavioral Finance',
+        body: [
+          'Behavioral finance studies how psychology causes investors to deviate from rational decisions.',
+          'Common biases: overconfidence, loss aversion, herding and anchoring.',
+          'Awareness of biases helps investors make better decisions.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'Behavioral finance studies the effect of ______ on decisions.', options: ['Taxes', 'Psychology/biases', 'Interest rates only', 'Currencies'], answer: 1, explanation: 'It examines psychological influences on choices.' },
+      { q: 'Feeling losses more than equivalent gains is:', options: ['Herding', 'Loss aversion', 'Anchoring', 'Overconfidence'], answer: 1, explanation: 'Loss aversion weights losses more heavily.', tricky: true },
+      { q: 'Following the crowd is:', options: ['Anchoring', 'Herding', 'Diversification', 'Hedging'], answer: 1, explanation: 'Herding is copying others’ actions.' },
+      { q: 'Over-relying on an initial figure is:', options: ['Anchoring', 'Loss aversion', 'Herding', 'Arbitrage'], answer: 0, explanation: 'Anchoring fixates on a reference point.', tricky: true },
+    ],
+  },
+  {
+    id: 'cfa-esg',
+    title: 'ESG Investing',
+    reels: [
+      {
+        kind: 'concept',
+        title: 'ESG Investing',
+        body: [
+          'ESG investing incorporates Environmental, Social and Governance factors into analysis and decisions.',
+          'It aims to manage long-term risks and align investments with values.',
+          'Approaches include screening, integration and impact investing.',
+        ],
+      },
+    ],
+    mcqs: [
+      { q: 'ESG stands for Environmental, Social and:', options: ['Growth', 'Governance', 'Gains', 'Global'], answer: 1, explanation: 'ESG = Environmental, Social, Governance.' },
+      { q: 'ESG factors are used to:', options: ['Guarantee returns', 'Manage long-term risks and align values', 'Avoid all tax', 'Time the market'], answer: 1, explanation: 'ESG addresses long-term risk and values.', tricky: true },
+      { q: 'Excluding certain sectors is an ESG approach called:', options: ['Screening', 'Hedging', 'Arbitrage', 'Anchoring'], answer: 0, explanation: 'Negative screening excludes undesirable holdings.' },
+      { q: 'Governance in ESG covers:', options: ['Carbon only', 'Board structure, ethics and controls', 'Only labour', 'Only pollution'], answer: 1, explanation: 'Governance covers how a company is run and controlled.' },
+    ],
+  },
+];
 
 export const cfa: Course = {
   id: 'cfa-if',
@@ -8,19 +620,19 @@ export const cfa: Course = {
   accent: '#3a4db0',
   glyph: '🎓',
   tagline:
-    'CFA Institute’s free certificate covering the essentials of the global investment industry — ethics, instruments, structure and client service.',
+    'CFA Institute’s free certificate covering the essentials of the global investment industry — ethics, tools, instruments, portfolios and risk.',
   overview: [
-    'The CFA Institute Investment Foundations® Certificate (formerly Claritas) is a free, entry-level programme covering the fundamentals of the investment industry.',
-    'It is designed for anyone who works with the industry — operations, HR, compliance, marketing, IT — not just front-office analysts, and needs no finance background.',
-    'The syllabus spans seven modules across roughly twenty chapters: the industry overview, ethics and regulation, economics and analytical tools, investment instruments, industry structure, serving client needs, and industry controls.',
+    'The CFA Institute Investment Foundations® Certificate is a free, entry-level programme covering the fundamentals of the investment industry.',
+    'It suits anyone working with the industry — operations, compliance, marketing, IT — not just front-office analysts, and needs no finance background.',
+    'This course breaks the syllabus into every topic across ethics, quantitative and economic tools, financial analysis and corporate finance, portfolios and investments, and risk and modern themes.',
   ],
   examPattern: {
-    format: 'Online, multiple-choice final assessment (proctored/online)',
-    duration: '~2–3 hours; self-paced study of the seven modules beforehand',
+    format: 'Online, multiple-choice final assessment',
+    duration: '~2–3 hours; self-paced study of the modules beforehand',
     questions: '~100 multiple-choice questions in the final assessment',
-    passing: 'Approximately 70% (a passing standard set by CFA Institute); certificate on passing',
+    passing: 'Approximately 70% (standard set by CFA Institute); certificate on passing',
     validity: 'Certificate does not expire',
-    fee: 'Free (the programme and assessment are offered at no cost)',
+    fee: 'Free (programme and assessment offered at no cost)',
     negativeMarking: 'None',
   },
   sources: [
@@ -31,438 +643,38 @@ export const cfa: Course = {
   modules: [
     {
       id: 'cfa-industry',
-      title: 'The Investment Industry & Ethics',
+      title: 'Ethics & the Financial System',
       summary:
-        'What the industry does, the forces that shape it, and the ethical foundation that underpins trust in finance.',
-      topics: [
-        {
-          id: 'cfa-industry-t',
-          title: 'The Investment Industry & Ethics',
-          reels: [
-            {
-              kind: 'concept',
-              title: 'What the investment industry does',
-              body: [
-                'The investment industry connects savers (who have surplus capital) with users of capital (companies and governments who need it).',
-                'It performs functions such as channelling savings into investment, price discovery, risk transfer, and providing liquidity.',
-                'Participants include investors, financial intermediaries (banks, brokers, asset managers), and issuers of securities.',
-              ],
-              keyTerms: [
-                { term: 'Financial intermediary', def: 'An institution that stands between savers and borrowers, e.g. a bank or asset manager.' },
-                { term: 'Liquidity', def: 'The ease of converting an asset into cash without a large loss in value.' },
-              ],
-            },
-            {
-              kind: 'insight',
-              title: 'Ethics: why trust is the industry’s currency',
-              body: [
-                'Ethics are moral principles that guide behaviour; the investment industry depends on trust because clients hand over their money.',
-                'The CFA Institute Code of Ethics and Standards of Professional Conduct set the global benchmark for ethical behaviour.',
-                'A framework for ethical decision-making helps professionals identify conflicts, consider stakeholders, and act with integrity.',
-              ],
-              tip: 'Foundations stresses distinguishing between what is legal and what is ethical — they are not always the same.',
-            },
-            {
-              kind: 'list',
-              title: 'Ethical principles in practice',
-              body: [
-                'Put client interests first and act with integrity, competence and diligence.',
-                'Avoid or disclose conflicts of interest; never use material non-public information (that is insider trading).',
-                'Maintain confidentiality and communicate fairly and honestly with clients.',
-                'Fiduciary duty is the legal and ethical obligation to act in a client’s best interest.',
-              ],
-            },
-          ],
-          mcqs: [
-            {
-              q: 'The core economic role of the investment industry is to:',
-              options: ['Print money', 'Connect savers with users of capital', 'Set tax policy', 'Guarantee profits'],
-              answer: 1,
-              explanation: 'The industry channels capital from savers to those who need it, aiding investment and growth.',
-            },
-            {
-              q: 'A financial intermediary is best described as an institution that:',
-              options: ['Only lends to governments', 'Stands between savers and borrowers', 'Issues currency', 'Audits companies'],
-              answer: 1,
-              explanation: 'Intermediaries such as banks and asset managers connect providers and users of capital.',
-            },
-            {
-              q: 'Ethics are best defined as:',
-              options: ['The same thing as laws', 'Moral principles that guide behaviour', 'Accounting rules', 'Tax regulations'],
-              answer: 1,
-              explanation: 'Ethics are moral principles guiding conduct; they overlap with but are distinct from laws.',
-            },
-            {
-              q: 'The global benchmark for ethical behaviour in the profession is the:',
-              options: ['IFRS standards', 'CFA Institute Code of Ethics and Standards of Professional Conduct', 'Basel Accord', 'SEC rulebook'],
-              answer: 1,
-              explanation: 'CFA Institute’s Code and Standards are the widely recognised ethical benchmark.',
-            },
-            {
-              q: 'Trading on material non-public information is:',
-              options: ['Encouraged', 'Insider trading and prohibited', 'A fiduciary duty', 'Required disclosure'],
-              answer: 1,
-              explanation: 'Using material non-public information to trade is insider trading, which is unethical and illegal.',
-            },
-            {
-              q: 'A fiduciary duty requires a professional to:',
-              options: ['Maximise their own fees', 'Act in the client’s best interest', 'Favour the largest client', 'Avoid all disclosure'],
-              answer: 1,
-              explanation: 'Fiduciary duty is the obligation to put the client’s interests first.',
-            },
-            {
-              q: 'Something can be legal yet still be:',
-              options: ['Always ethical', 'Unethical', 'A fiduciary duty', 'Tax-free'],
-              answer: 1,
-              explanation: 'Legality and ethics are not identical — an action may be lawful but still unethical.',
-            },
-            {
-              q: 'Liquidity refers to:',
-              options: ['A company’s profit', 'How easily an asset converts to cash without large loss', 'The interest rate', 'A type of derivative'],
-              answer: 1,
-              explanation: 'Liquidity is the ease of turning an asset into cash at little cost.',
-            },
-            {
-              q: 'When a professional faces a conflict of interest, best practice is to:',
-              options: ['Ignore it', 'Avoid or disclose it', 'Exploit it quietly', 'Delegate it to the client'],
-              answer: 1,
-              explanation: 'Conflicts of interest should be avoided where possible and otherwise clearly disclosed.',
-            },
-            {
-              q: 'Price discovery is the process by which:',
-              options: ['Taxes are calculated', 'Markets determine the price of an asset through supply and demand', 'Dividends are paid', 'Currencies are printed'],
-              answer: 1,
-              explanation: 'Price discovery is how buyers and sellers interacting in a market set an asset’s price.',
-            },
-          ],
-        },
-      ],
+        'The ethical foundation and how the system works — ethics, professional standards, markets and instruments.',
+      topics: ethicsSystem,
     },
     {
       id: 'cfa-tools',
-      title: 'Inputs & Analytical Tools',
+      title: 'Quantitative & Economic Tools',
       summary:
-        'Economics, financial-statement analysis, and the quantitative concepts used to analyse investments.',
-      topics: [
-        {
-          id: 'cfa-tools-t',
-          title: 'Inputs & Analytical Tools',
-          reels: [
-            {
-              kind: 'concept',
-              title: 'Microeconomics and macroeconomics',
-              body: [
-                'Microeconomics studies individual decisions — supply, demand and how prices are set in markets.',
-                'Macroeconomics studies the whole economy — GDP, inflation, unemployment and monetary/fiscal policy.',
-                'Central banks use monetary policy (interest rates, money supply); governments use fiscal policy (tax and spending).',
-              ],
-              keyTerms: [
-                { term: 'Monetary policy', def: 'Central-bank actions on interest rates and money supply to manage the economy.' },
-                { term: 'Fiscal policy', def: 'Government taxing and spending decisions that influence the economy.' },
-              ],
-            },
-            {
-              kind: 'insight',
-              title: 'Reading financial statements',
-              body: [
-                'The three key statements are the income statement, balance sheet and cash-flow statement.',
-                'Ratio analysis interprets them: liquidity (current ratio), profitability (net margin, ROE), and solvency (debt-to-equity).',
-                'Financial statements are prepared under standards such as IFRS or local GAAP to make them comparable.',
-              ],
-              formula: 'Current ratio = Current assets ÷ Current liabilities',
-            },
-            {
-              kind: 'formula',
-              title: 'The time value of money & risk',
-              body: [
-                'Money has a time value: a sum today is worth more than the same sum later because it can earn a return.',
-                'Present value discounts future cash flows; future value compounds present sums forward.',
-                'Return rewards risk: higher expected return generally comes with higher risk, and diversification reduces risk without sacrificing expected return proportionally.',
-              ],
-              formula: 'FV = PV × (1 + r)^n',
-              tip: 'Compounding means interest earns interest — small rate differences grow hugely over long horizons.',
-            },
-          ],
-          mcqs: [
-            {
-              q: 'Microeconomics primarily studies:',
-              options: ['National GDP', 'Individual markets, supply and demand', 'Government budgets', 'Global trade balances'],
-              answer: 1,
-              explanation: 'Microeconomics focuses on individual decision-makers, prices, supply and demand.',
-            },
-            {
-              q: 'Monetary policy is conducted by:',
-              options: ['The government treasury', 'The central bank', 'Stock exchanges', 'Rating agencies'],
-              answer: 1,
-              explanation: 'Central banks set interest rates and manage money supply — that is monetary policy.',
-            },
-            {
-              q: 'Fiscal policy refers to:',
-              options: ['Interest-rate decisions', 'Government taxing and spending', 'Currency printing', 'Setting exchange rates'],
-              answer: 1,
-              explanation: 'Fiscal policy is the government’s use of taxation and public spending.',
-            },
-            {
-              q: 'The current ratio measures:',
-              options: ['Profitability', 'Short-term liquidity', 'Long-term solvency', 'Market value'],
-              answer: 1,
-              explanation: 'Current assets ÷ current liabilities gauges the firm’s ability to meet short-term obligations.',
-            },
-            {
-              q: 'Return on Equity (ROE) measures profitability relative to:',
-              options: ['Total assets', 'Shareholders’ equity', 'Revenue', 'Liabilities'],
-              answer: 1,
-              explanation: 'ROE = net income ÷ shareholders’ equity, showing profit generated per unit of equity.',
-            },
-            {
-              q: 'International financial statements are commonly prepared under:',
-              options: ['CAPM', 'IFRS or local GAAP', 'WACC', 'The SEBI Act'],
-              answer: 1,
-              explanation: 'IFRS and national GAAP frameworks standardise financial reporting for comparability.',
-            },
-            {
-              q: 'The time value of money implies that a rupee today is worth:',
-              options: ['Less than a rupee next year', 'More than a rupee next year', 'The same as next year', 'Nothing'],
-              answer: 1,
-              explanation: 'Because it can earn a return, money available now is worth more than the same amount later.',
-            },
-            {
-              q: 'Compounding means that:',
-              options: ['Interest is paid only on the principal', 'Interest earns interest over time', 'Returns fall over time', 'Risk disappears'],
-              answer: 1,
-              explanation: 'Compounding lets accumulated interest itself earn interest, accelerating growth.',
-            },
-            {
-              q: 'Generally, higher expected return is associated with:',
-              options: ['Lower risk', 'Higher risk', 'No risk', 'Guaranteed outcomes'],
-              answer: 1,
-              explanation: 'The risk–return trade-off: greater expected return usually requires accepting greater risk.',
-            },
-            {
-              q: 'Diversification primarily works by:',
-              options: ['Guaranteeing profits', 'Reducing risk by combining assets that don’t move together', 'Increasing leverage', 'Removing all return'],
-              answer: 1,
-              explanation: 'Combining imperfectly correlated assets lowers portfolio risk for a given expected return.',
-            },
-          ],
-        },
-      ],
+        'The analytical toolkit — risk & return, time value of money, DCF, probability, statistics and economics.',
+      topics: tools,
+    },
+    {
+      id: 'cfa-finance',
+      title: 'Financial Analysis & Corporate Finance',
+      summary:
+        'Reading statements and firm decisions — ratios, corporate finance, capital budgeting and cost of capital.',
+      topics: financeAnalysis,
     },
     {
       id: 'cfa-instruments',
-      title: 'Investment Instruments',
+      title: 'Portfolio & Investments',
       summary:
-        'Equities, fixed income, derivatives and alternative investments — how each is structured and used.',
-      topics: [
-        {
-          id: 'cfa-instruments-t',
-          title: 'Investment Instruments',
-          reels: [
-            {
-              kind: 'list',
-              title: 'Equities and fixed income',
-              body: [
-                'Equity securities represent ownership; returns come from price appreciation and dividends, with residual (last) claim on assets.',
-                'Fixed-income securities are debt; they pay interest and return principal, ranking ahead of equity in a wind-up.',
-                'Money-market instruments are short-term debt (T-bills, commercial paper) prized for safety and liquidity.',
-              ],
-              keyTerms: [
-                { term: 'Residual claim', def: 'Equity holders are paid last, after all creditors, on liquidation.' },
-                { term: 'Coupon', def: 'The periodic interest a bond pays its holder.' },
-              ],
-            },
-            {
-              kind: 'concept',
-              title: 'Derivatives',
-              body: [
-                'A derivative’s value derives from an underlying asset. The main types are forwards, futures, options and swaps.',
-                'They are used to hedge risk, gain exposure efficiently, or speculate.',
-                'Options give a right without obligation; forwards/futures create an obligation to transact at a set price.',
-              ],
-            },
-            {
-              kind: 'insight',
-              title: 'Alternative investments & pooled vehicles',
-              body: [
-                'Alternatives include real estate, commodities, private equity, hedge funds and infrastructure — often less liquid and less correlated with stocks and bonds.',
-                'Pooled vehicles let investors combine money: mutual funds, ETFs, and index funds provide diversification and professional management.',
-                'ETFs trade on exchanges like shares; index funds passively track a benchmark at low cost.',
-              ],
-              tip: 'Foundations highlights that alternatives can diversify a portfolio but often carry higher fees and lower liquidity.',
-            },
-          ],
-          mcqs: [
-            {
-              q: 'Equity securities represent:',
-              options: ['A loan to the issuer', 'Ownership in a company', 'A fixed interest claim', 'A currency'],
-              answer: 1,
-              explanation: 'Equity is ownership with a residual claim on assets and earnings.',
-            },
-            {
-              q: 'In a liquidation, equity holders are paid:',
-              options: ['First', 'Before bondholders', 'Last, after creditors', 'Equally with creditors'],
-              answer: 2,
-              explanation: 'Equity is the residual claim — paid only after all creditors are satisfied.',
-            },
-            {
-              q: 'Fixed-income securities are essentially:',
-              options: ['Ownership stakes', 'Debt that pays interest and returns principal', 'Derivatives', 'Commodities'],
-              answer: 1,
-              explanation: 'Bonds are debt instruments paying interest (coupons) and repaying principal at maturity.',
-            },
-            {
-              q: 'Treasury bills and commercial paper are examples of:',
-              options: ['Equity', 'Money-market instruments', 'Derivatives', 'Real estate'],
-              answer: 1,
-              explanation: 'These are short-term debt (money-market) instruments valued for safety and liquidity.',
-            },
-            {
-              q: 'A derivative derives its value from:',
-              options: ['A central bank', 'An underlying asset', 'The dividend yield', 'The audit report'],
-              answer: 1,
-              explanation: 'Derivatives (forwards, futures, options, swaps) derive value from an underlying asset.',
-            },
-            {
-              q: 'An option differs from a forward in that an option:',
-              options: ['Creates an obligation to transact', 'Grants a right without obligation', 'Has no premium', 'Cannot be traded'],
-              answer: 1,
-              explanation: 'Options give the holder a right (not obligation) to transact; forwards create an obligation.',
-            },
-            {
-              q: 'Which is an example of an alternative investment?',
-              options: ['A government bond', 'A blue-chip stock', 'Private equity', 'A savings account'],
-              answer: 2,
-              explanation: 'Private equity, real estate, hedge funds and commodities are alternative investments.',
-            },
-            {
-              q: 'An ETF is best described as a fund that:',
-              options: ['Cannot be traded', 'Trades on an exchange like a share', 'Guarantees returns', 'Only holds cash'],
-              answer: 1,
-              explanation: 'Exchange-traded funds trade intraday on exchanges, unlike traditional mutual funds.',
-            },
-            {
-              q: 'A key benefit of a pooled investment vehicle is:',
-              options: ['Guaranteed profit', 'Diversification and professional management', 'Zero fees', 'No risk'],
-              answer: 1,
-              explanation: 'Pooling money enables diversification and access to professional management.',
-            },
-            {
-              q: 'Compared with stocks and bonds, alternative investments are often:',
-              options: ['More liquid and cheaper', 'Less liquid with higher fees', 'Risk-free', 'Always government-backed'],
-              answer: 1,
-              explanation: 'Alternatives tend to be less liquid and carry higher fees, though they can aid diversification.',
-            },
-          ],
-        },
-      ],
+        'Building portfolios — management, diversification, allocation, and equity, fixed income, alternatives and derivatives.',
+      topics: portfolioInvestments,
     },
     {
       id: 'cfa-structure',
-      title: 'Industry Structure, Clients & Controls',
+      title: 'Risk & Modern Themes',
       summary:
-        'How the industry is organised, how it serves different clients, and the controls that keep it safe.',
-      topics: [
-        {
-          id: 'cfa-structure-t',
-          title: 'Industry Structure, Clients & Controls',
-          reels: [
-            {
-              kind: 'list',
-              title: 'How the industry is structured',
-              body: [
-                'Buy-side firms (asset managers, pension funds, hedge funds) invest money on behalf of clients.',
-                'Sell-side firms (brokers, investment banks) create, sell and trade securities and provide research.',
-                'Support functions — custody, clearing, settlement, back office — keep transactions running.',
-              ],
-              keyTerms: [
-                { term: 'Buy-side', def: 'Institutions that invest money, e.g. asset managers and pension funds.' },
-                { term: 'Sell-side', def: 'Firms that create and sell securities and provide execution and research.' },
-              ],
-            },
-            {
-              kind: 'concept',
-              title: 'Serving client needs',
-              body: [
-                'Clients range from individuals (retail) to institutions (pension funds, insurers, endowments).',
-                'Understanding a client means assessing their objectives (return needs) and constraints (risk tolerance, time horizon, liquidity, taxes, legal).',
-                'An Investment Policy Statement (IPS) documents these to guide portfolio decisions.',
-              ],
-              tip: 'Foundations frames suitability as matching investments to a client’s objectives and constraints — not just chasing returns.',
-            },
-            {
-              kind: 'insight',
-              title: 'Industry controls: risk, compliance and regulation',
-              body: [
-                'Regulation protects investors, ensures fair and orderly markets, and reduces systemic risk.',
-                'Compliance functions make sure firms follow laws and internal policies; risk management identifies and controls exposures.',
-                'Performance is measured and reported (e.g. against benchmarks) so clients can judge results fairly.',
-              ],
-            },
-          ],
-          mcqs: [
-            {
-              q: 'Asset managers and pension funds are part of the:',
-              options: ['Sell-side', 'Buy-side', 'Regulators', 'Custodians only'],
-              answer: 1,
-              explanation: 'The buy-side invests money on behalf of clients; the sell-side creates and sells securities.',
-            },
-            {
-              q: 'Investment banks and brokers primarily operate on the:',
-              options: ['Buy-side', 'Sell-side', 'Central bank', 'Treasury'],
-              answer: 1,
-              explanation: 'Sell-side firms create, distribute and trade securities and provide research.',
-            },
-            {
-              q: 'A pension fund is an example of a(n):',
-              options: ['Retail client', 'Institutional client', 'Regulator', 'Custodian'],
-              answer: 1,
-              explanation: 'Pension funds, insurers and endowments are institutional clients.',
-            },
-            {
-              q: 'An Investment Policy Statement (IPS) documents a client’s:',
-              options: ['Tax returns', 'Objectives and constraints', 'Bank passwords', 'Trading algorithms'],
-              answer: 1,
-              explanation: 'The IPS captures return objectives and constraints (risk, horizon, liquidity, tax, legal).',
-            },
-            {
-              q: 'Which is a client constraint rather than an objective?',
-              options: ['Target return', 'Time horizon', 'Alpha', 'Benchmark outperformance'],
-              answer: 1,
-              explanation: 'Constraints include time horizon, liquidity, taxes and legal factors; return is an objective.',
-            },
-            {
-              q: 'The primary purpose of regulation is to:',
-              options: ['Guarantee profits', 'Protect investors and ensure fair, orderly markets', 'Set share prices', 'Eliminate all risk'],
-              answer: 1,
-              explanation: 'Regulation protects investors, promotes fair markets and reduces systemic risk.',
-            },
-            {
-              q: 'The function that ensures a firm follows laws and internal policies is:',
-              options: ['Trading', 'Compliance', 'Marketing', 'Custody'],
-              answer: 1,
-              explanation: 'Compliance monitors adherence to legal requirements and internal rules.',
-            },
-            {
-              q: 'Custody, clearing and settlement are examples of:',
-              options: ['Front-office revenue generation', 'Support/back-office functions', 'Regulatory bodies', 'Client objectives'],
-              answer: 1,
-              explanation: 'These operational functions support and complete transactions behind the scenes.',
-            },
-            {
-              q: 'Suitability means matching investments to a client’s:',
-              options: ['Favourite brands', 'Objectives and constraints', 'Nationality', 'Age of account'],
-              answer: 1,
-              explanation: 'Suitability aligns recommendations with the client’s goals and constraints.',
-            },
-            {
-              q: 'Investment performance is best judged by comparing returns to:',
-              options: ['A random number', 'An appropriate benchmark', 'The highest fund available', 'The risk-free rate only'],
-              answer: 1,
-              explanation: 'Performance is measured against a suitable benchmark to give context to the returns.',
-            },
-          ],
-        },
-      ],
+        'Managing risk and today’s themes — risk management, behavioral finance and ESG investing.',
+      topics: riskThemes,
     },
   ],
 };
