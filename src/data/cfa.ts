@@ -617,7 +617,7 @@ export const cfa: Course = {
   title: 'CFA Investment Foundations',
   shortTitle: 'CFA Foundations',
   provider: 'CFA Institute',
-  accent: '#3a4db0',
+  accent: '#6470b4',
   glyph: '🎓',
   tagline:
     'CFA Institute’s free certificate covering the essentials of the global investment industry — ethics, tools, instruments, portfolios and risk.',

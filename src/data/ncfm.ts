@@ -700,7 +700,7 @@ export const ncfm: Course = {
   title: 'NCFM Certification',
   shortTitle: 'NCFM',
   provider: 'NSE Academy',
-  accent: '#b5632a',
+  accent: '#c2703f',
   glyph: '🪙',
   tagline:
     'NSE Academy’s Certification in Financial Markets — markets and products, trading and operations, analysis, derivatives, and regulation.',

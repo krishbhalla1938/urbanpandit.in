@@ -1342,7 +1342,7 @@ export const nism: Course = {
   title: 'NISM Certifications',
   shortTitle: 'NISM',
   provider: 'NISM · SEBI',
-  accent: '#1f7a5a',
+  accent: '#5e8a5f',
   glyph: '🏛️',
   tagline:
     'The SEBI-mandated certifications for India’s securities-market professionals — foundation, equity, derivatives, mutual funds, advisory, research and debt.',

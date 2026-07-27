@@ -1,5 +1,6 @@
 import type { Course } from '../types';
 import { ChevronRight, Sun, Moon } from './Icons';
+import { accentVars } from '../lib/accent';
 
 interface Props {
   courses: Course[];
@@ -52,7 +53,7 @@ export default function Home({ courses, onOpen, theme, onToggleTheme }: Props) {
               className="course-card"
               key={c.id}
               onClick={() => onOpen(c.id)}
-              style={{ ['--accent' as string]: c.accent } as React.CSSProperties}
+              style={accentVars(c.accent)}
             >
               <div className="course-card__glyph">{c.glyph}</div>
               <div className="course-card__body">

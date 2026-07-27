@@ -15,7 +15,7 @@ export default function App() {
     document.documentElement.setAttribute('data-theme', theme);
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', theme === 'dark' ? '#1c1b19' : '#f0eee6');
+      ?.setAttribute('content', theme === 'dark' ? '#1d1c18' : '#f4f2ea');
     localStorage.setItem('rfa-theme', theme);
   }, [theme]);
 

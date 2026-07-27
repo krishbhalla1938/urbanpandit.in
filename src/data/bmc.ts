@@ -1465,7 +1465,7 @@ export const bmc: Course = {
   title: 'Bloomberg Market Concepts',
   shortTitle: 'Bloomberg BMC',
   provider: 'Bloomberg for Education',
-  accent: '#3b6ea5',
+  accent: '#4f7cae',
   glyph: '📈',
   tagline:
     'Bloomberg’s self-paced e-learning course covering economics, currencies, fixed income and equities through the lens of the Terminal.',

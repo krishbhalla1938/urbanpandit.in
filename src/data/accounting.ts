@@ -705,7 +705,7 @@ export const accounting: Course = {
   title: 'Financial Accounting Fundamentals',
   shortTitle: 'Financial Accounting',
   provider: 'Core Curriculum',
-  accent: '#7a5cc0',
+  accent: '#86689f',
   glyph: '📒',
   tagline:
     'The bedrock of finance — principles, the recording cycle, the financial statements, adjustments, ratios and standards.',

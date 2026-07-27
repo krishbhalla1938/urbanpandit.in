@@ -724,7 +724,7 @@ export const fmva: Course = {
   title: 'Financial Modeling & Valuation Analyst',
   shortTitle: 'FMVA',
   provider: 'Corporate Finance Institute (CFI)',
-  accent: '#2f6f6f',
+  accent: '#3f8378',
   glyph: '📊',
   tagline:
     'CFI’s professional certification in building three-statement models and valuing companies with DCF, comparables and precedent transactions.',

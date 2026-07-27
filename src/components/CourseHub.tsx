@@ -5,6 +5,7 @@ import TestsHub from './TestsHub';
 import SubView from './SubView';
 import { FormulaSheet, Flashcards, Glossary, SyllabusView } from './FeatureViews';
 import { getCourseStats } from '../lib/progress';
+import { accentVars } from '../lib/accent';
 import {
   ArrowLeft,
   Play,
@@ -41,7 +42,7 @@ interface Props {
 
 export default function CourseHub({ course, onExit }: Props) {
   const [view, setView] = useState<View>('hub');
-  const accentStyle = { ['--accent' as string]: course.accent } as React.CSSProperties;
+  const accentStyle = accentVars(course.accent);
   const back = () => setView('hub');
 
   let inner;

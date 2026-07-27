@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Course, FeedItem, Module, Reel } from '../types';
 import { markTopicViewed } from '../lib/progress';
+import { accentVars } from '../lib/accent';
 import Quiz from './Quiz';
 import { ArrowLeft, ChevronDown, ChevronUp, Link as LinkIcon, Book, Menu, X, ListIcon } from './Icons';
 
@@ -78,10 +79,7 @@ export default function CourseFeed({ course, onExit }: Props) {
 
   // Apply the course accent to this subtree. height:100% is required so the
   // scroll-snap feed inside can resolve its own 100% height.
-  const accentStyle = {
-    ['--accent' as string]: course.accent,
-    height: '100%',
-  } as React.CSSProperties;
+  const accentStyle = { ...accentVars(course.accent), height: '100%' };
 
   // Track the active slide via IntersectionObserver on scroll-snap children.
   useEffect(() => {
