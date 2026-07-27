@@ -213,8 +213,8 @@ export const courseMeta: Record<string, CourseMeta> = {
       { module: 'Excel & Modelling Foundations', points: ['Excel Fundamentals', 'Advanced Excel', 'Power Query', 'Power Pivot', 'Financial Charts', 'Dashboard Design'] },
       { module: 'Accounting & the 3 Statements', points: ['Financial Statements', 'Income Statement', 'Balance Sheet', 'Cash Flow Statement', 'Three Statement Model', 'Financial Ratios'] },
       { module: 'Forecasting & the Model', points: ['Forecasting', 'Revenue Forecasting', 'Cost Forecasting', 'Working Capital', 'Depreciation', 'Capital Expenditure', 'Debt Schedule', 'Budgeting', 'Forecasting Models'] },
-      { module: 'Valuation', points: ['DCF Valuation', 'Comparable Company Analysis', 'Precedent Transactions', 'Sensitivity Analysis', 'Scenario Analysis', 'Business Valuation', 'Startup Valuation'] },
-      { module: 'Advanced & Specialised', points: ['LBO Basics', 'M&A Modeling', 'Real Estate Modeling', 'Project Finance', 'Presentation Skills'] },
+      { module: 'Intrinsic Valuation', points: ['DCF Valuation', 'Sensitivity Analysis', 'Scenario Analysis', 'Business Valuation', 'Startup Valuation'] },
+      { module: 'Relative Valuation & Advanced', points: ['Comparable Company Analysis', 'Precedent Transactions', 'LBO Basics', 'M&A Modeling', 'Real Estate Modeling', 'Project Finance', 'Presentation Skills'] },
     ],
   },
 
