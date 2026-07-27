@@ -350,8 +350,8 @@ export const courseMeta: Record<string, CourseMeta> = {
     syllabus: [
       { module: 'Markets & Products', points: ['Financial Markets', 'Primary Market', 'Secondary Market', 'Equity Markets', 'Debt Markets', 'Money Markets', 'Commodity Markets', 'Currency Markets'] },
       { module: 'Trading & Operations', points: ['Trading Mechanism', 'Order Types', 'Market Participants', 'Clearing & Settlement', 'Depositories', 'Demat Accounts', 'Risk Management'] },
-      { module: 'Analysis', points: ['Technical Analysis', 'Fundamental Analysis', 'Financial Statements', 'Investment Analysis', 'Portfolio Management'] },
-      { module: 'Derivatives', points: ['Derivatives', 'Futures', 'Options', 'Greeks', 'Option Strategies', 'Commodity Derivatives', 'Currency Derivatives', 'Mutual Funds'] },
+      { module: 'Analysis & Investing', points: ['Technical Analysis', 'Fundamental Analysis', 'Financial Statements', 'Investment Analysis', 'Portfolio Management', 'Mutual Funds'] },
+      { module: 'Derivatives', points: ['Derivatives', 'Futures', 'Options', 'Greeks', 'Option Strategies', 'Commodity Derivatives', 'Currency Derivatives'] },
       { module: 'Regulation & Ethics', points: ['Taxation', 'SEBI Regulations', 'Investor Protection', 'Ethics'] },
     ],
   },
